@@ -1,9 +1,10 @@
 # p5-sketch-template
-This template provides the bare bone for get start with p5.js, and added my
-favorite color scheme (rose-pine) in sketch.js.
+This template provides the bare bone for getting start with p5.js, also added my
+favorite color palette [rose-pine](https://rosepinetheme.com/).
 
 ## How to use it?
-Just `cd` to the root directory of this template, and run `make` in your command
-line shell, that is it!
+First you need install [browser-sync](https://browsersync.io/).
 
-Note: you need install `browser-sync` first.
+After that, `cd` to the root directory of this template, and execute `make` in your command
+line shell, this will run the sketch in the browser, and will automatically update
+when you save files.
