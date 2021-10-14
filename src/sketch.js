@@ -51,7 +51,7 @@ function createGUI() {
 
   // define control button
   const buttonStyle = {
-    textSize: 8,
+    textSize: 12,
     rounding: 6,
   };
   const buttons = [
