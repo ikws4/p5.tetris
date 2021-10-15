@@ -103,7 +103,6 @@ function onStopButtonPressed() {
 }
 
 function onResetButtonPressed() {
-  isStart = false;
   background(p_base);
   resetSketch();
 }
