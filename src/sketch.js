@@ -131,6 +131,7 @@ function draw() {
   }
   pop();
 
+  noStroke();
   fill(p_surface);
   rect(0, 0, sidebarWidth, sidebarHeight);
   drawGUI();
