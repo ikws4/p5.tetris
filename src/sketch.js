@@ -55,6 +55,5 @@ function setup() {
 }
 
 function draw() {
-  stroke(p_text);
-  ellipse(10, 10, 20, 20);
+  background(p_base);
 }
