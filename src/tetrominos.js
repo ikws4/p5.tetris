@@ -1,6 +1,6 @@
 class Tetromino {
   constructor(color, states) {
-    this.x = (cols / 2 - floor(states[0].length / 2)) * cellSize;
+    this.x = (cols / 2 - floor(states[0].length / 2));
     this.y = 0;
     this.color = color;
     this.states = states;
@@ -14,8 +14,8 @@ class Tetromino {
       for (let j = 0; j < this.states[this.currentState][i].length; j++) {
         if (this.states[this.currentState][i][j] === 1) {
           rect(
-            this.x + j * cellSize,
-            this.y + i * cellSize,
+            (this.x + j) * cellSize,
+            (this.y + i) * cellSize,
             cellSize,
             cellSize
           );
@@ -37,9 +37,9 @@ class Tetromino {
     for (let i = 0; i < state.length; i++) {
       for (let j = 0; j < state[0].length; j++) {
         if (state[i][j] === 1) {
-          let x_left = x + j * cellSize;
-          let x_right = x + (j + 1) * cellSize;
-          let y_bottom = y + (i + 1) * cellSize;
+          let x_left = (x + j) * cellSize;
+          let x_right = (x + j + 1) * cellSize;
+          let y_bottom = (y + i + 1) * cellSize;
           if (x_left < 0 || x_right > width || y_bottom > height) {
             return false;
           }
@@ -59,20 +59,20 @@ class Tetromino {
   }
   
   left() {
-    if (this._isValidXY(this.x - cellSize, this.y)) {
-      this.x -= cellSize;
+    if (this._isValidXY(this.x - 1, this.y)) {
+      this.x -= 1;
     }
   }
 
   down() {
-    if (this._isValidXY(this.x, this.y + cellSize)) {
-      this.y += cellSize;
+    if (this._isValidXY(this.x, this.y + 1)) {
+      this.y += 1;
     }
   }
 
   right() {
-    if (this._isValidXY(this.x + cellSize, this.y)) {
-      this.x += cellSize;
+    if (this._isValidXY(this.x + 1, this.y)) {
+      this.x += 1;
     }
   }
 }
