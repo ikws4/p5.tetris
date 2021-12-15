@@ -1,7 +1,13 @@
+class Brick {
+  constructor(color) {
+    this.color = color;
+  }
+}
+
 class Tetromino {
   constructor(color, states) {
-    this.x = (cols / 2 - floor(states[0].length / 2));
-    this.y = 0;
+    this.x = cols / 2 - floor(states[0].length / 2);
+    this.y = 1;
     this.color = color;
     this.states = states;
     this.currentState = 0;
@@ -37,12 +43,13 @@ class Tetromino {
     for (let i = 0; i < state.length; i++) {
       for (let j = 0; j < state[0].length; j++) {
         if (state[i][j] === 1) {
-          let x_left = (x + j) * cellSize;
-          let x_right = (x + j + 1) * cellSize;
-          let y_bottom = (y + i + 1) * cellSize;
-          if (x_left < 0 || x_right > width || y_bottom > height) {
-            return false;
-          }
+          // let x_left = (x + j) * cellSize;
+          // let x_right = (x + j + 1) * cellSize;
+          // let y_bottom = (y + i + 1) * cellSize;
+          // if (x_left < 0 || x_right > width || y_bottom > height) {
+          //   return false;
+          // }
+          if (board[y + i][x + j] !== null) return false;
         }
       }
     }
@@ -57,7 +64,7 @@ class Tetromino {
     let state = this.states[this.currentState];
     return this._isValid(state, x, y);
   }
-  
+
   left() {
     if (this._isValidXY(this.x - 1, this.y)) {
       this.x -= 1;
@@ -70,9 +77,43 @@ class Tetromino {
     }
   }
 
+  downInstant() {
+    while (this._isValidXY(this.x, this.y + 1)) {
+      this.y += 1;
+      if (this.isCannotFalling()) {
+        break;
+      }
+    }
+  }
+
   right() {
     if (this._isValidXY(this.x + 1, this.y)) {
       this.x += 1;
+    }
+  }
+
+  isCannotFalling() {
+    let state = this.states[this.currentState];
+    for (let i = state.length - 1; i >= 0; i--) {
+      for (let j = 0; j < state[i].length; j++) {
+        if (state[i][j] === 1) {
+          if (this.y + i + 1 >= rows || board[this.y + i + 1][this.x + j] !== null) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  place(board) {
+    let state = this.states[this.currentState];
+    for (let i = 0; i < state.length; i++) {
+      for (let j = 0; j < state[i].length; j++) {
+        if (state[i][j] === 1) {
+          board[this.y + i][this.x + j] = new Brick(this.color);
+        }
+      }
     }
   }
 }
@@ -93,6 +134,7 @@ class I extends Tetromino {
         [0, 1],
       ],
     ]);
+    this.y -= 1;
   }
 }
 
@@ -144,6 +186,36 @@ class L extends Tetromino {
   constructor() {
     super(p.rose, [
       [
+        [0, 0, 1],
+        [1, 1, 1],
+        [0, 0, 0],
+      ],
+      [
+        [0, 1, 0],
+        [0, 1, 0],
+        [0, 1, 1],
+      ],
+      [
+        [0, 0, 0],
+        [1, 1, 1],
+        [1, 0, 0],
+      ],
+      [
+        [1, 1, 0],
+        [0, 1, 0],
+        [0, 1, 0],
+      ],
+    ]);
+  }
+}
+
+//  o
+//  o
+// oo
+class J extends Tetromino {
+  constructor() {
+    super(p.pine, [
+      [
         [1, 0, 0],
         [1, 1, 1],
         [0, 0, 0],
@@ -180,6 +252,24 @@ class S extends Tetromino {
         [1, 0],
         [1, 1],
         [0, 1],
+      ],
+    ]);
+  }
+}
+
+// oo
+//  oo
+class Z extends Tetromino {
+  constructor() {
+    super(p.foam, [
+      [
+        [1, 1, 0],
+        [0, 1, 1],
+      ],
+      [
+        [0, 1],
+        [1, 1],
+        [1, 0],
       ],
     ]);
   }
