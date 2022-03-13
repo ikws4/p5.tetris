@@ -8,7 +8,6 @@ A tetris implementation with p5.js
 
 Before you start, make sure you have [browser-sync](https://browsersync.io/) installed in yoour mechine.
 
-
 ```
 git clone https://github.com/ikws4/p5.tetris.git
 cd p5.tetris
