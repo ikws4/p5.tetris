@@ -6,12 +6,13 @@ A tetris implementation with p5.js
 
 # Setup
 
-First you need install [browser-sync](https://browsersync.io/).
+Before you start, make sure you have [browser-sync](https://browsersync.io/) installed in yoour mechine.
 
-After install, just run:
 
-```bash
-make run
+```
+git clone https://github.com/ikws4/p5.tetris.git
+cd p5.tetris
+make
 ```
 
 # How to play?
