@@ -1,32 +1,32 @@
 # p5.tetris
 
-A tetris implementation with p5.js
+Tetris made with p5.js
 
 <img width="420" alt="Screen Shot 2022-03-13 at 11 09 06 PM" src="https://user-images.githubusercontent.com/47056144/158066197-4d3ffc41-d7ff-4faa-a3e4-70e0d7f4e55c.png">
 
 # Setup
 
-Before you start, make sure you have [browser-sync](https://browsersync.io/) installed in yoour mechine.
+Clone the repository, then open the `index.html` in your browser and start to play Tetris 🚀.
 
-```
-git clone https://github.com/ikws4/p5.tetris.git
-cd p5.tetris
-make
+```bash
+$ git clone https://github.com/ikws4/p5.tetris.git
 ```
 
 # How to play?
 
-You can use your favorite vim keybing to move the tetromino.
+Just pressed the arrow keys to control the Tetromino :).
 
-`h`: Left
+Vim user? Then use your favorite vim keybing to control it.
 
-`j`: Down
+<kbd>h</kbd>: Left
 
-`J`: Down with instant
+<kbd>j</kbd>: Down
 
-`l`: Right
+<kbd>l</kbd>: Right
 
-`k`: Rotate
+<kbd>k</kbd>: Rotate
+
+<kbd>SHIFT</kbd> + <kbd>j</kbd>: Down with instant
 
 # License
 
