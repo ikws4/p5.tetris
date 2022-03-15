@@ -2,15 +2,9 @@
 
 Tetris written in p5.js
 
-<img width="420" alt="Screen Shot 2022-03-13 at 11 09 06 PM" src="https://user-images.githubusercontent.com/47056144/158066197-4d3ffc41-d7ff-4faa-a3e4-70e0d7f4e55c.png">
+<img width="420" alt="tetris" src="https://user-images.githubusercontent.com/47056144/158307610-3ba27425-b4c1-4bdd-8396-612be4b44a91.png">
 
-# Setup
-
-Clone the repository, then open the `index.html` in your browser and start to play Tetris 🚀.
-
-```bash
-$ git clone https://github.com/ikws4/p5.tetris.git
-```
+[PLAY NOW 🚀](https://ikws4.github.io/p5.tetris/)
 
 # How to play?
 
