@@ -1,10 +1,8 @@
 # p5.tetris
 
-Tetris written in p5.js
+Tetris written in p5.js [🚀 PLAY NOW](https://ikws4.github.io/p5.tetris/)
 
 <img width="420" alt="tetris" src="https://user-images.githubusercontent.com/47056144/158307610-3ba27425-b4c1-4bdd-8396-612be4b44a91.png">
-
-[PLAY NOW 🚀](https://ikws4.github.io/p5.tetris/)
 
 # How to play?
 
