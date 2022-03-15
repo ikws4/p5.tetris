@@ -126,9 +126,9 @@ function keyPressed() {
 function performMoveAction() {
   if (key === "h" || keyCode === LEFT_ARROW) {
     tetrominosQueue[0].left();
-  } else if (key === "J" || keyCode === DOWN_ARROW) {
+  } else if (key === "J" || keyIsDown(SHIFT) && keyCode === DOWN_ARROW) {
     tetrominosQueue[0].downInstant();
-  } else if (key === "j") {
+  } else if (key === "j" || keyCode === DOWN_ARROW) {
     tetrominosQueue[0].down();
   } else if (key === "l" || keyCode === RIGHT_ARROW) {
     tetrominosQueue[0].right();
