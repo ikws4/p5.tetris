@@ -20,6 +20,7 @@ let score = 0;
 let bg;
 
 function setup() {
+  cellSize = Math.floor(Math.min(windowWidth, windowHeight) / rows);
   createCanvas(cellSize * (cols + 6), cellSize * rows);
   frameRate(fps);
 
@@ -61,10 +62,14 @@ function draw() {
     }
   }
 
-  if (frameCount % (floor((fps - level) / 2)) === 0 && currentTetromino.isCannotFalling(board)) {
+  if (
+    frameCount % floor((fps - level) / 2) === 0 &&
+    currentTetromino.isCannotFalling(board)
+  ) {
     currentTetromino.place(board);
     tetrominosQueue.shift();
     tetrominosQueue.push(randomTetromino());
+    coolDown = 30;
     checkFilledRow();
   } else {
     if (frameCount % (fps - level) === 0) {
@@ -72,6 +77,8 @@ function draw() {
       score++;
     }
   }
+
+  coolDown--;
 
   // next panel
   push();
@@ -128,7 +135,7 @@ function keyPressed() {
   let action = ACTION_DOWN;
   if (key === "h" || keyCode === LEFT_ARROW) {
     action = ACTION_LEFT;
-  } else if (key === "J" || keyIsDown(SHIFT) && keyCode === DOWN_ARROW) {
+  } else if (key === "J" || (keyIsDown(SHIFT) && keyCode === DOWN_ARROW)) {
     action = ACTION_INSTANT_DOWN;
   } else if (key === "j" || keyCode === DOWN_ARROW) {
     action = ACTION_DOWN;
@@ -140,25 +147,25 @@ function keyPressed() {
   performAction(action);
 }
 
-let prevMouseY = -1;
+let coolDown = 30;
 
-function doubleClicked() {
-  performAction(ACTION_ROTATE);
-}
+function mouseDragged(e) {
+  let dx = e.movementX;
+  let dy = e.movementY;
 
-function mouseDragged() {
-  let tetromino = tetrominosQueue[0];
-  let x = mouseX / cellSize;
-  let w = tetromino.getWidth();
-  tetromino.moveTo(Math.floor(x - w / 2));
+  if (coolDown < 0) {
+    if (dx < -10) {
+      performAction(ACTION_LEFT);
+    } else if (dx > 10) {
+      performAction(ACTION_RIGHT);
+    } 
 
-  if (prevMouseY != -1) {
-    let dy = mouseY - prevMouseY;
-    if (dy > 30) {
-      tetromino.downInstant();
+    if (dy > 20) {
+      performAction(ACTION_INSTANT_DOWN);
+    } else if (dy < -10) {
+      performAction(ACTION_ROTATE);
     }
   }
-  prevMouseY = mouseY;
 }
 
 function performAction(action) {
@@ -174,6 +181,7 @@ function performAction(action) {
   } else if (action === ACTION_ROTATE) {
     tetromino.rotate();
   }
+  coolDown = 30;
 }
 
 function randomTetromino() {
