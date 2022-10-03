@@ -107,6 +107,13 @@ function draw() {
   text("LEVEL", cellSize, cellSize);
   text(level, cellSize, 3 * cellSize);
   pop();
+
+  // debug
+  push();
+  textSize(cellSize);
+  fill(p.text);
+  text(dx + ", " + dy, cellSize, cellSize);
+  pop();
 }
 
 function checkFilledRow() {
@@ -148,10 +155,11 @@ function keyPressed() {
 }
 
 let coolDown = 30;
+let dx = 0, dy = 0;
 
 function mouseDragged(e) {
-  let dx = e.movementX;
-  let dy = e.movementY;
+  dx = e.movementX;
+  dy = e.movementY;
 
   if (coolDown < 0) {
     if (dx < -10) {
