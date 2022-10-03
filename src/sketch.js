@@ -107,13 +107,6 @@ function draw() {
   text("LEVEL", cellSize, cellSize);
   text(level, cellSize, 3 * cellSize);
   pop();
-
-  // debug
-  push();
-  textSize(cellSize);
-  fill(p.text);
-  text(dx + ", " + dy, cellSize, cellSize);
-  pop();
 }
 
 function checkFilledRow() {
@@ -155,25 +148,36 @@ function keyPressed() {
 }
 
 let coolDown = 30;
-let dx = 0, dy = 0;
+let touchStartX = 0, touchStartY = 0;
+let touchDx = 0, touchDy = 0;
+
+function touchStarted() {
+  touchStartX = mouseX;
+  touchStartY = mouseY;
+}
 
 function touchMoved(e) {
-  dx = e.movementX;
-  dy = e.movementY;
+  if (!(e instanceof TouchEvent)) return;
+  
+  touchDx = mouseX - touchStartX;
+  touchDy = mouseY - touchStartY;
 
   if (coolDown < 0) {
-    if (dx < -10) {
+    if (touchDx < -10) {
       performAction(ACTION_LEFT);
-    } else if (dx > 10) {
+    } else if (touchDx > 10) {
       performAction(ACTION_RIGHT);
     } 
 
-    if (dy > 20) {
+    if (touchDy > 20) {
       performAction(ACTION_INSTANT_DOWN);
-    } else if (dy < -10) {
+    } else if (touchDy < -10) {
       performAction(ACTION_ROTATE);
     }
   }
+
+  touchStartX = mouseX;
+  touchStartY = mouseY;
 }
 
 function performAction(action) {
