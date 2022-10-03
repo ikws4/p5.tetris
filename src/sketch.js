@@ -1,5 +1,11 @@
 let p = new Palette("base");
 
+const ACTION_LEFT = 0;
+const ACTION_RIGHT = 1;
+const ACTION_DOWN = 3;
+const ACTION_INSTANT_DOWN = 4;
+const ACTION_ROTATE = 5;
+
 let fps = 60;
 
 let rows = 22;
@@ -119,25 +125,54 @@ function moveRowDown(row) {
 }
 
 function keyPressed() {
-  performMoveAction();
-  performRotateAction();
-}
-
-function performMoveAction() {
+  let action = ACTION_DOWN;
   if (key === "h" || keyCode === LEFT_ARROW) {
-    tetrominosQueue[0].left();
+    action = ACTION_LEFT;
   } else if (key === "J" || keyIsDown(SHIFT) && keyCode === DOWN_ARROW) {
-    tetrominosQueue[0].downInstant();
+    action = ACTION_INSTANT_DOWN;
   } else if (key === "j" || keyCode === DOWN_ARROW) {
-    tetrominosQueue[0].down();
+    action = ACTION_DOWN;
   } else if (key === "l" || keyCode === RIGHT_ARROW) {
-    tetrominosQueue[0].right();
+    action = ACTION_RIGHT;
+  } else if (key === "k" || keyCode === UP_ARROW) {
+    action = ACTION_ROTATE;
   }
+  performAction(action);
 }
 
-function performRotateAction() {
-  if (key === "k" || keyCode === UP_ARROW) {
-    tetrominosQueue[0].rotate();
+let prevMouseY = -1;
+
+function doubleClicked() {
+  performAction(ACTION_ROTATE);
+}
+
+function mouseDragged() {
+  let tetromino = tetrominosQueue[0];
+  let x = mouseX / cellSize;
+  let w = tetromino.getWidth();
+  tetromino.moveTo(Math.floor(x - w / 2));
+
+  if (prevMouseY != -1) {
+    let dy = mouseY - prevMouseY;
+    if (dy > 30) {
+      tetromino.downInstant();
+    }
+  }
+  prevMouseY = mouseY;
+}
+
+function performAction(action) {
+  let tetromino = tetrominosQueue[0];
+  if (action === ACTION_LEFT) {
+    tetromino.left();
+  } else if (action === ACTION_RIGHT) {
+    tetromino.right();
+  } else if (action === ACTION_DOWN) {
+    tetromino.down();
+  } else if (action === ACTION_INSTANT_DOWN) {
+    tetromino.downInstant();
+  } else if (action === ACTION_ROTATE) {
+    tetromino.rotate();
   }
 }
 

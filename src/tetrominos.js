@@ -65,6 +65,23 @@ class Tetromino {
     return this._isValid(state, x, y);
   }
 
+  getWidth() {
+    let state = this.states[this.currentState];
+    return state[0].length;
+  }
+
+  getHeight() {
+    let state = this.states[this.currentState];
+    return state.length;
+  }
+
+  moveTo(x, y) {
+    if (this._isValidXY(x, y || this.y)) {
+      this.x = x;
+      this.y = Math.max(this.y, y || this.y);
+    }
+  }
+
   left() {
     if (this._isValidXY(this.x - 1, this.y)) {
       this.x -= 1;
