@@ -157,7 +157,7 @@ function keyPressed() {
 let coolDown = 30;
 let dx = 0, dy = 0;
 
-function mouseDragged(e) {
+function touchMoved(e) {
   dx = e.movementX;
   dy = e.movementY;
 
